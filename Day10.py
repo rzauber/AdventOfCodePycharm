@@ -428,74 +428,74 @@ for nodeRow in nodeRowsWithSpaces:
       count += 1
 print(count)
 
-class Edge:
-  def __init__(self, nodeA, nodeB):
-    if nodeA.x < nodeB.x:
-      self.a = nodeA
-      self.b = nodeB
-    elif nodeA.y < nodeB.y:
-      self.a = nodeA
-      self.b = nodeB
-    else:
-      self.a = nodeB
-      self.b = nodeA
-  def __key(self):
-    return (self.a,self.b)
-  def __hash__(self):
-    return hash(self.__key())
-  def __eq__(self, other):
-    if isinstance(other, Node):
-      return self.__key() == other.__key()
-    return NotImplemented
-  def __str__(self):
-    return str(self.a) + ' ' + str(self.b)
-  def isDirectlyTouchingZero(self):
-    if self.a.char == '0' or self.b.char == '0':
-      return True
-    else:
-      return False
-  def getNextTraversals(self):
-    nextEdges = []
-    if self.a.x == self.b.x: # horizontal edge
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x-1], nodeRows[self.a.y][self.a.x]))
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y][self.a.x+1]))
-      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x-1], nodeRows[self.b.y][self.b.x]))
-      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y][self.b.x+1]))
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x-1], nodeRows[self.b.y][self.b.x-1]))
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x+1], nodeRows[self.b.y][self.b.x+1]))
-    elif self.a.y == self.b.y: # vertical edge
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y-1][self.a.x]))
-      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y+1][self.a.x]))
-      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y-1][self.b.x]))
-      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y+1][self.b.x]))
-      nextEdges.append(Edge(nodeRows[self.a.y-1][self.a.x], nodeRows[self.b.y-1][self.b.x]))
-      nextEdges.append(Edge(nodeRows[self.a.y+1][self.a.x], nodeRows[self.b.y+1][self.b.x]))
-    returnEdges = []
-    for nextEdge in nextEdges:
-      print('  Testing Next Edge: ' + str(nextEdge))
-      if nextEdge.isValidTraversal(self):
-        returnEdges.append(nextEdge)
-    return returnEdges
-  def isValidTraversal(self, previousEdge):
-    if self.a.char in ['0','.'] and self.b.char in ['0','.']:
-      return True
-  def setZeroesToAdjacents(self):
-    self.a.char = '0'
-    self.b.char = '0'
+#class Edge:
+#  def __init__(self, nodeA, nodeB):
+#    if nodeA.x < nodeB.x:
+#      self.a = nodeA
+#      self.b = nodeB
+#    elif nodeA.y < nodeB.y:
+#      self.a = nodeA
+#      self.b = nodeB
+#    else:
+#      self.a = nodeB
+#      self.b = nodeA
+#  def __key(self):
+#    return (self.a,self.b)
+#  def __hash__(self):
+#    return hash(self.__key())
+#  def __eq__(self, other):
+#    if isinstance(other, Node):
+#      return self.__key() == other.__key()
+#    return NotImplemented
+#  def __str__(self):
+#    return str(self.a) + ' ' + str(self.b)
+#  def isDirectlyTouchingZero(self):
+#    if self.a.char == '0' or self.b.char == '0':
+#      return True
+#    else:
+#      return False
+#  def getNextTraversals(self):
+#    nextEdges = []
+#    if self.a.x == self.b.x: # horizontal edge
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x-1], nodeRows[self.a.y][self.a.x]))
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y][self.a.x+1]))
+#      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x-1], nodeRows[self.b.y][self.b.x]))
+#      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y][self.b.x+1]))
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x-1], nodeRows[self.b.y][self.b.x-1]))
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x+1], nodeRows[self.b.y][self.b.x+1]))
+#    elif self.a.y == self.b.y: # vertical edge
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y-1][self.a.x]))
+#      nextEdges.append(Edge(nodeRows[self.a.y][self.a.x], nodeRows[self.a.y+1][self.a.x]))
+#      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y-1][self.b.x]))
+#      nextEdges.append(Edge(nodeRows[self.b.y][self.b.x], nodeRows[self.b.y+1][self.b.x]))
+#      nextEdges.append(Edge(nodeRows[self.a.y-1][self.a.x], nodeRows[self.b.y-1][self.b.x]))
+#      nextEdges.append(Edge(nodeRows[self.a.y+1][self.a.x], nodeRows[self.b.y+1][self.b.x]))
+#    returnEdges = []
+#    for nextEdge in nextEdges:
+#      print('  Testing Next Edge: ' + str(nextEdge))
+#      if nextEdge.isValidTraversal(self):
+#        returnEdges.append(nextEdge)
+#    return returnEdges
+#  def isValidTraversal(self, previousEdge):
+#    if self.a.char in ['0','.'] and self.b.char in ['0','.']:
+#      return True
+#  def setZeroesToAdjacents(self):
+#    self.a.char = '0'
+#    self.b.char = '0'
 
-def getNodeEdges(node):
-  x = node.x
-  y = node.y
-  return [[Edge(nodeRows[y-1][x-1], nodeRows[y-1][x])], # NNW
-          [Edge(nodeRows[y-1][x], nodeRows[y-1][x+1])], # NNE
-          [Edge(nodeRows[y-1][x-1], nodeRows[y][x-1])], # WNW
-          [Edge(nodeRows[y-1][x+1], nodeRows[y][x+1])], # ENE
-          [Edge(nodeRows[y][x-1], nodeRows[y+1][x-1])], # WSW
-          [Edge(nodeRows[y][x+1], nodeRows[y+1][x+1])], # ESE
-          [Edge(nodeRows[y+1][x-1], nodeRows[y][x+1])], # SSW
-          [Edge(nodeRows[y+1][x], nodeRows[y+1][x+1])]] # SSE
-def getSNodeEdges():
-  return getNodeEdges(sNode)
+#def getNodeEdges(node):
+#  x = node.x
+#  y = node.y
+#  return [[Edge(nodeRows[y-1][x-1], nodeRows[y-1][x])], # NNW
+#          [Edge(nodeRows[y-1][x], nodeRows[y-1][x+1])], # NNE
+#          [Edge(nodeRows[y-1][x-1], nodeRows[y][x-1])], # WNW
+#          [Edge(nodeRows[y-1][x+1], nodeRows[y][x+1])], # ENE
+#          [Edge(nodeRows[y][x-1], nodeRows[y+1][x-1])], # WSW
+#          [Edge(nodeRows[y][x+1], nodeRows[y+1][x+1])], # ESE
+#          [Edge(nodeRows[y+1][x-1], nodeRows[y][x+1])], # SSW
+#          [Edge(nodeRows[y+1][x], nodeRows[y+1][x+1])]] # SSE
+#def getSNodeEdges():
+#  return getNodeEdges(sNode)
 
 #edgesVisited = set()
 #edgeListStack = getSNodeEdges()
